@@ -4,19 +4,25 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "dining_tables")
+@Table(name = "order_items")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class DiningTable {
+public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String qrCode;
+    @ManyToOne
+    @JoinColumn(name = "food_id")
+    private Food food;
 
-    private String name; // e.g., "Table 1"
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
+
+    private int quantity;
 }

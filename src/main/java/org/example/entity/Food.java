@@ -1,13 +1,15 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "foods")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Food {
 
     @Id
@@ -16,5 +18,9 @@ public class Food {
 
     private String name;
 
-    private Double price;
+    private double price;
+
+    private String category;
+
+    private String imageUrl;
 }

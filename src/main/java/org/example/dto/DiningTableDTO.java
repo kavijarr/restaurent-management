@@ -1,12 +1,14 @@
 package org.example.dto;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class DiningTableDTO {
     private Long id;
     private String qrCode;
-    private String tableName;
+    private String name;
 }

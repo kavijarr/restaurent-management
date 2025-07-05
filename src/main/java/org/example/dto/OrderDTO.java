@@ -1,19 +1,22 @@
 package org.example.dto;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class OrderDTO {
     private Long id;
+    private boolean active;
+    private boolean delivery;
+    private double totalPrice;
+    private LocalDateTime createdAt;
     private Long tableId;
-    private Boolean active;
-    private Boolean delivery;
-    private Double totalPrice;
-    private LocalDateTime orderTime;
-    private List<Long> foodIds;
+    private String tableName;
+    private List<OrderItemDTO> items;
 }

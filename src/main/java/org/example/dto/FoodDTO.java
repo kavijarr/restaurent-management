@@ -8,5 +8,7 @@ import lombok.Data;
 public class FoodDTO {
     private Long id;
     private String name;
-    private Double price;
+    private double price;
+    private String category;
+    private String imageUrl;
 }
