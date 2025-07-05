@@ -12,7 +12,7 @@ public class OrderFactory {
     public static Order createDineInOrder(DiningTable table, List<Food> foods, double totalPrice) {
         return Order.builder()
                 .table(table)
-                .foods(foods)
+                //.foods(foods)
                 .totalPrice(totalPrice)
                 .createdAt(LocalDateTime.now())
                 .active(true)
