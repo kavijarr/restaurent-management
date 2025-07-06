@@ -89,7 +89,43 @@ public class OrderServiceImpl implements OrderService {
         return mapToDTO(order);
     }
 
+    @Override
+    public List<OrderDTO> getAllOrders() {
+        return orderRepository.findAll()
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean isOrderStillActive(Long orderId) {
+        return orderRepository.findById(orderId)
+                .map(Order::isActive)
+                .orElse(false);
+    }
+
+//    private OrderDTO mapToDTO(Order order) {
+//        return OrderDTO.builder()
+//                .id(order.getId())
+//                .active(order.isActive())
+//                .delivery(order.isDelivery())
+//                .totalPrice(order.getTotalPrice())
+//                .createdAt(order.getCreatedAt())
+//                .tableId(order.getTable().getId())
+//                .tableName(order.getTable().getName())
+//                .items(order.getItems()
+//                        .stream()
+//                        .map(this::mapOrderItemToDTO)
+//                        .collect(Collectors.toList()))
+//                .build();
+//    }
+
     private OrderDTO mapToDTO(Order order) {
+        List<OrderItem> items = order.getItems();
+        if (items == null) {
+            items = new ArrayList<>();
+        }
+
         return OrderDTO.builder()
                 .id(order.getId())
                 .active(order.isActive())
@@ -98,12 +134,12 @@ public class OrderServiceImpl implements OrderService {
                 .createdAt(order.getCreatedAt())
                 .tableId(order.getTable().getId())
                 .tableName(order.getTable().getName())
-                .items(order.getItems()
-                        .stream()
+                .items(items.stream()
                         .map(this::mapOrderItemToDTO)
                         .collect(Collectors.toList()))
                 .build();
     }
+
 
     private OrderItemDTO mapOrderItemToDTO(OrderItem item) {
         return OrderItemDTO.builder()

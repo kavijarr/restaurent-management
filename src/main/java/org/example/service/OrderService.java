@@ -13,4 +13,8 @@ public interface OrderService {
     OrderDTO addFoodToOrder(String qrCode, Long foodId, int qty);
     void completeOrder(Long orderId);
     OrderDTO getOrder(Long orderId);
+
+    List<OrderDTO> getAllOrders();
+
+    boolean isOrderStillActive(Long orderId);
 }

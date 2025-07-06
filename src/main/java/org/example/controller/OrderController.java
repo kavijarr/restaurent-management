@@ -7,12 +7,19 @@ import org.example.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/order")
 @RequiredArgsConstructor
 public class OrderController {
 
     private final OrderService orderService;
+
+    @GetMapping
+    public List<OrderDTO> getAllOrders() {
+        return orderService.getAllOrders();
+    }
 
     @PostMapping("/start")
     public OrderDTO startOrder(@RequestParam String qrCode) {
@@ -34,5 +41,10 @@ public class OrderController {
     @GetMapping("/{orderId}")
     public OrderDTO getOrder(@PathVariable Long orderId) {
         return orderService.getOrder(orderId);
+    }
+
+    @GetMapping("/is-active")
+    public ResponseEntity<Boolean> isOrderActive(@RequestParam Long orderId){
+        return ResponseEntity.ok(orderService.isOrderStillActive(orderId));
     }
 }
